@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const LoginPageContainer = styled.div`
+const RegistrationContainer = styled.div`
   background-image: linear-gradient(to bottom right, #f06, #9f6);
   min-height: 100vh;
   display: flex;
@@ -10,32 +9,28 @@ const LoginPageContainer = styled.div`
   justify-content: center;
 `;
 
-const LoginForm = styled.form`
+const RegistrationForm = styled.form`
   background-color: rgba(255, 255, 255, 0.9);
-  width: 350px;
-  padding: 30px;
+  padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 `;
 
 const InputField = styled.input`
   width: 100%;
+  margin-bottom: 15px;
   padding: 10px;
-  margin-bottom: 20px;
-  border: none;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  background-color: #f6f6f6;
-  font-size: 16px;
 `;
 
 const Button = styled.button`
   width: 100%;
-  padding: 12px;
+  padding: 10px;
   background-color: #007bff;
-  color: white;
+  color: #fff;
   border: none;
   border-radius: 5px;
-  font-size: 16px;
   cursor: pointer;
 
   &:hover {
@@ -43,18 +38,12 @@ const Button = styled.button`
   }
 `;
 
-const RegisterLink = styled(Link)`
-  display: block;
-  text-align: center;
-  margin-top: 15px;
-  color: #007bff;
-  text-decoration: none;
-`;
-
-const Login = () => {
+const Registration = () => {
   const [formData, setFormData] = useState({
+    username: "",
     email: "",
     password: "",
+    confirmPassword: "",
   });
 
   const handleChange = (event) => {
@@ -67,14 +56,21 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Login data:", formData);
-    // Here, you would typically send the data to a server for authentication
+    console.log("Registration data:", formData);
+    // Here, you would typically send the data to a server for registration
   };
 
   return (
-    <LoginPageContainer>
-      <LoginForm onSubmit={handleSubmit}>
-        <h2>Login</h2>
+    <RegistrationContainer>
+      <RegistrationForm onSubmit={handleSubmit}>
+        <h2>Registration</h2>
+        <InputField
+          type="text"
+          name="username"
+          placeholder="Username"
+          value={formData.username}
+          onChange={handleChange}
+        />
         <InputField
           type="email"
           name="email"
@@ -89,11 +85,17 @@ const Login = () => {
           value={formData.password}
           onChange={handleChange}
         />
-        <Button type="submit">Login</Button>
-        <RegisterLink to="/register">Don't have an account? Register here</RegisterLink>
-      </LoginForm>
-    </LoginPageContainer>
+        <InputField 
+          type="confirmPassword"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          value={formData.confirmPassword}
+          onChange={handleChange}
+        />
+        <Button type="submit">Register</Button>
+      </RegistrationForm>
+    </RegistrationContainer>
   );
 };
 
-export default Login;
+export default Registration;

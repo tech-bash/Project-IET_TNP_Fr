@@ -2,24 +2,15 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import styled from "styled-components";
 import LoginPage from "./components/login";
+import DashboardPage from "./components/dashboard";
+import HomePage from "./components/home"
+import RegistrationPage from "./components/registration";
 
 const AppContainer = styled.div`
   max-width: 960px;
   margin: 0 auto;
   padding: 20px;
 `;
-
-const RegistrationPage = () => {
-  return <h2>Registration Page</h2>;
-};
-
-const HomePage = () => {
-  return <h2>Home Page</h2>;
-};
-
-const DashboardPage = () => {
-  return <h2>Dashboard Page</h2>;
-};
 
 const App = () => {
   return (

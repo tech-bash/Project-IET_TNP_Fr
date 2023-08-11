@@ -1,36 +1,52 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
-import LoginPage from "./components/login";
-import DashboardPage from "./components/dashboard";
-import HomePage from "./components/home"
-import RegistrationPage from "./components/registration";
+
+import Home from "./components/home";
+import Login from "./components/login";
+import Registration from "./components/registration";
+import Dashboard from"./components/dashboard";
+
+const Navbar = styled.nav`
+  background-color: #007bff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+`;
+
+const NavLink = styled.a`
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #0056b3;
+  }
+`;
 
 const AppContainer = styled.div`
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 20px;
+  font-family: Arial, sans-serif;
 `;
 
 const App = () => {
   return (
-    <Router>
-      <AppContainer>
-        <nav>
-          <Link to="/">Login</Link>
-          <Link to="/register">Registration</Link>
-          <Link to="/home">Home</Link>
-          <Link to="/dashboard">Dashboard</Link>
-        </nav>
-
+    <AppContainer>
+      <Router>
+        <Navbar>
+          <NavLink href="/">Login</NavLink>
+          <NavLink href="/home">Home</NavLink>
+          <NavLink href="/register">Register</NavLink>
+          <NavLink href="/dashboard">Dashboard</NavLink>
+        </Navbar>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/register" element={<RegistrationPage />} />
-          <Route path="/home" element={<HomePage />} />
-          <Route path="/dashboard" element={<DashboardPage />} />
+          <Route path="/" element={<Login />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
-      </AppContainer>
-    </Router>
+      </Router>
+    </AppContainer>
   );
 };
 

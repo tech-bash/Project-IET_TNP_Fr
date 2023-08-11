@@ -22,11 +22,6 @@ const NavLink = styled(Link)`
 const Home = () => {
   return (
     <div>
-      <Navbar>
-        <NavLink to="/home">Home</NavLink>
-        <NavLink to="/dashboard">Dashboard</NavLink>
-        <NavLink to="/profile">Profile</NavLink>
-      </Navbar>
       <h1>Welcome to the Home Page</h1>
     </div>
   );

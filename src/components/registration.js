@@ -40,10 +40,11 @@ const Button = styled.button`
 
 const Registration = () => {
   const [formData, setFormData] = useState({
-    username: "",
     email: "",
+    name: "",
+    phone: "",
     password: "",
-    confirmPassword: "",
+    password2: "",
   });
 
   const handleChange = (event) => {
@@ -84,17 +85,24 @@ const Registration = () => {
       <RegistrationForm onSubmit={handleSubmit}>
         <h2>Registration</h2>
         <InputField
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-        />
-        <InputField
           type="email"
           name="email"
           placeholder="Email"
           value={formData.email}
+          onChange={handleChange}
+        />
+        <InputField
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={formData.name}
+          onChange={handleChange}
+        />
+        <InputField
+          type="phone"
+          name="phone"
+          placeholder="Phone Number"
+          value={formData.phone}
           onChange={handleChange}
         />
         <InputField
@@ -103,12 +111,12 @@ const Registration = () => {
           placeholder="Password"
           value={formData.password}
           onChange={handleChange}
-        />
+        />        
         <InputField 
-          type="confirmPassword"
-          name="confirmPassword"
+          type="password2"
+          name="password2"
           placeholder="Confirm Password"
-          value={formData.confirmPassword}
+          value={formData.password2}
           onChange={handleChange}
         />
         <Button type="submit">Register</Button>

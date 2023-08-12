@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const LoginPageContainer = styled.div`
@@ -52,6 +52,7 @@ const RegisterLink = styled(Link)`
 `;
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -65,10 +66,28 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Login data:", formData);
-    // Here, you would typically send the data to a server for authentication
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/account/login/?", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        console.log("Login successful!");
+        // You can redirect the user to a dashboard or home page here
+        navigate("./components/dashboard"); // Replace with the desired route
+      } else {
+        console.error("Login failed.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (

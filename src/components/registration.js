@@ -54,10 +54,29 @@ const Registration = () => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Registration data:", formData);
     // Here, you would typically send the data to a server for registration
+
+    try {
+      const response = await fetch("http://127.0.0.1:8000/api/account/register/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        console.log("Registration successful!");
+        // You can redirect the user to a new page or perform other actions here
+      } else {
+        console.error("Registration failed.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (

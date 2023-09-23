@@ -3,13 +3,19 @@ import styled from "styled-components";
 
 
 const ProfileView = () => {
-  // Sample user data, replace with actual user data from your API or state
-  const user = {
-    username: "john_doe",
-    email: "john@example.com",
-    fullName: "John Doe",
-    // Add more profile data as needed
-  };
+  const [userData, setUserData] = useState(null);
+
+  useEffect(() => {
+      // Fetch user profile data from the API
+      fetch("http://127.0.0.1:8000/api/account/profile/")
+        .then((response) => response.json())
+        .then((data) => setUserData(data))
+        .catch((error) => console.error("Error fetching profile:", error));
+    }, []);
+
+  if (!userData) {
+      return <div>Loading...</div>;
+    }
 
   return (
     <ProfileContainer>
@@ -26,7 +32,6 @@ const ProfileView = () => {
         <ProfileLabel>Full Name:</ProfileLabel>
         <ProfileValue>{user.fullName}</ProfileValue>
       </ProfileInfo>
-      {/* Add more profile information here */}
     </ProfileContainer>
   );
 };

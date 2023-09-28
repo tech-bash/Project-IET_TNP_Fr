@@ -74,7 +74,12 @@ const Dashboard = () => {
 
   useEffect(() => {
     // Fetch student placement data from the API
-    fetch("https://placement-site.onrender.com/api/tnp/placement/list_all/")
+    fetch("https://placement-site.onrender.com/api/tnp/placement/list_all/", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    }) 
       .then((response) => response.json())
       .then((data) => setPlacements(data))
       .catch((error) => console.error("Error fetching placements:", error));

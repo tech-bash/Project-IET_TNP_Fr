@@ -1,5 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
+import Modal from "react-modal";
+import CreateEntryForm from "./createEntryForm";
+
+const CreateButton = styled.button`
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  cursor: pointer;
+`;
 
 const DashboardContainer = styled.div`
   max-width: 800px;
@@ -7,37 +20,122 @@ const DashboardContainer = styled.div`
   padding: 20px;
 `;
 
-const Card = styled.div`
-  background-color: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 20px;
-  margin: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+const Table = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
 `;
 
-const Title = styled.h2`
-  margin-bottom: 10px;
+const TableHeader = styled.thead`
+  background-color: #007bff;
+  color: #fff;
+`;
+
+const TableHeaderCell = styled.th`
+  padding: 10px;
+  text-align: left;
+`;
+
+const TableRow = styled.tr`
+  &:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+`;
+
+const TableCell = styled.td`
+  padding: 10px;
+  text-align: left;
+`;
+
+const ModalContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
+const ModalContent = styled.div`
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 400px;
+`;
+
+const ModalHeader = styled.h2`
+  font-size: 24px;
+  margin-bottom: 20px;
 `;
 
 const Dashboard = () => {
+  const [placements, setPlacements] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  useEffect(() => {
+    // Fetch student placement data from the API
+    fetch("https://placement-site.onrender.com/api/tnp/placement/list_all/")
+      .then((response) => response.json())
+      .then((data) => setPlacements(data))
+      .catch((error) => console.error("Error fetching placements:", error));
+  }, []);
+
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <DashboardContainer>
-      <Title>Dashboard</Title>
-      <Card>
-        <h3>Card 1</h3>
-        <p>This is the content of Card 1.</p>
-      </Card>
-      <Card>
-        <h3>Card 2</h3>
-        <p>This is the content of Card 2.</p>
-      </Card>
-      <Card>
-        <h3>Card 3</h3>
-        <p>This is the content of Card 3.</p>
-      </Card>
+      <h1>Student Placement Dashboard</h1>
+      <CreateButton onClick={openModal}>Create Entry</CreateButton>
+      <Table>
+        <TableHeader>
+          <tr>
+            <TableHeaderCell>Name</TableHeaderCell>
+            <TableHeaderCell>Roll No.</TableHeaderCell>
+            <TableHeaderCell>Company</TableHeaderCell>
+            <TableHeaderCell>Package</TableHeaderCell>
+          </tr>
+        </TableHeader>
+        <tbody>
+          {placements.map((placement, index) => (
+            <TableRow key={index}>
+              <TableCell>{placement.name}</TableCell>
+              <TableCell>{placement.rollNo}</TableCell>
+              <TableCell>{placement.company}</TableCell>
+              <TableCell>{placement.package}</TableCell>
+            </TableRow>
+          ))}
+        </tbody>
+      </Table>
+
+      {/* Modal for Creating Entries */}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Create Entry Modal"
+        style={{
+          content: {
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          },
+        }}
+      >
+        <ModalContainer>
+          <ModalContent>
+            <ModalHeader>Create Entry</ModalHeader>
+            <CreateEntryForm closeModal={closeModal} />
+          </ModalContent>
+        </ModalContainer>
+      </Modal>
     </DashboardContainer>
   );
 };
 
 export default Dashboard;
+

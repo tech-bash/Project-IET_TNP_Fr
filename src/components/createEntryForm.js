@@ -50,7 +50,7 @@ const CreateEntryForm = ({ closeModal }) => {
 
     // Send a Get request to your API to create a new entry
     fetch("https://placement-site.onrender.com/api/tnp/placement/create/", {
-      method: "GET",
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
       },

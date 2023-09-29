@@ -74,7 +74,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     // Fetch student placement data from the API
-    fetch("https://placement-site.onrender.com/api/tnp/placement/list_all/", {
+    fetch("http://127.0.0.1:8000/api/tnp/placement/list_all/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

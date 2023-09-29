@@ -47,25 +47,34 @@ const CreateEntryForm = ({ closeModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // Send a Get request to your API to create a new entry
-    fetch("https://placement-site.onrender.com/api/tnp/placement/create/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    })
-      .then((response) => {
-        if (response.ok) {
-          closeModal();
-        } else {
-          console.error("Error creating entry:", response.statusText);
-        }
-      })
-      .catch((error) => {
-        console.error("Error creating entry:", error);
-      });
+    var myHeaders = new Headers();
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk1OTE5NDA0LCJpYXQiOjE2OTU5MTc2MDQsImp0aSI6IjU4OGE5YmQwZjhlNjQ1MjVhZDcyZDE2NTdlNWMxZjRkIiwidXNlcl9pZCI6MX0.E0AMqFoJp3W-aK_icDiaUK9ZZ02cblu5EHwBGWxb4Zo");
+    myHeaders.append("Content-Type", "application/json");
+    
+    var raw = JSON.stringify({
+      "user": "akvermaav629@gmail.com",
+      "company_name": "Shuk it",
+      "company_email": "haha@gmail.com",
+      "company_website": "https://www.amazon.in/",
+      "company_address": "ha ha street",
+      "company_phone": "234235345",
+      "company_salary": "3546545",
+      "company_location": "bangbang",
+      "company_category": "Education"
+    });
+    
+    var requestOptions = {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    };
+    
+    fetch("http://127.0.0.1:8000/api/tnp/placement/create/", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
   };
 
   return (
@@ -111,7 +120,7 @@ const CreateEntryForm = ({ closeModal }) => {
           required
         />
 
-        <FormButton type="submit">Create</FormButton>
+        <FormButton onClick={handleSubmit}>Create</FormButton>
       </Form>
     </FormContainer>
   );

@@ -48,10 +48,10 @@ const FormButton = styled.button`
 
 const CreateEntryForm = ({ closeModal }) => {
   const [formData, setFormData] = useState({
-    name: "",
-    rollNo: "",
-    company: "",
-    package: "",
+    user: "",
+    company_phone: "",
+    company_name: "",
+    company_package: "",
   });
 
   const handleChange = (e) => {
@@ -61,39 +61,22 @@ const CreateEntryForm = ({ closeModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    e.preventDefault();
     var myHeaders = new Headers();
-    myHeaders.append("Accept", "application/json");
-    myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjk1OTE5NDA0LCJpYXQiOjE2OTU5MTc2MDQsImp0aSI6IjU4OGE5YmQwZjhlNjQ1MjVhZDcyZDE2NTdlNWMxZjRkIiwidXNlcl9pZCI6MX0.E0AMqFoJp3W-aK_icDiaUK9ZZ02cblu5EHwBGWxb4Zo");
-    myHeaders.append("Content-Type", "application/json");
-    
-    var raw = JSON.stringify({
-      "user": "akvermaav629@gmail.com",
-      "company_name": "Shuk it",
-      "company_email": "haha@gmail.com",
-      "company_website": "https://www.amazon.in/",
-      "company_address": "ha ha street",
-      "company_phone": "234235345",
-      "company_salary": "3546545",
-      "company_location": "bangbang",
-      "company_category": "Education"
-    });
-    
+
     var requestOptions = {
       method: 'POST',
       headers: myHeaders,
-      body: raw,
+      body: JSON.stringify(formData),
       redirect: 'follow'
     };
     
-    fetch("https://placement-site.onrender.com/api/tnp/placement/create/", requestOptions)
+    const response = fetch("https://placement-site.onrender.com/api/tnp/placement/create/", requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
-    
   };
 
-  return (
+  return ( 
     <FormContainer>
       <Form onSubmit={handleSubmit}>
         <FormLabel htmlFor="name">Name:</FormLabel>

@@ -80,7 +80,7 @@ const Login = () => {
       if (response.ok) {
         console.log("Login successful!");
         // You can redirect the user to a dashboard or home page here
-        navigate("./components/dashboard"); // Replace with the desired route
+        navigate("../dashboard"); // Replace with the desired route
       } else {
         console.error("Login failed.");
       }

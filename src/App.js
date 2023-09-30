@@ -56,10 +56,10 @@ const App = () => {
       <Router>
         <Navbar>
           <NavContainer>
-            <NavLogo href="/home"><img src="https://dbrau.ac.in/wp-content/uploads/2022/02/Dr_B._R._Ambedkar_University_Logo.png" style={{width:120, height:120}}></img></NavLogo>
+            <NavLogo href="/"><img src="https://dbrau.ac.in/wp-content/uploads/2022/02/Dr_B._R._Ambedkar_University_Logo.png" style={{width:120, height:120}}></img></NavLogo>
             <NavLinks>
               <NavLink>
-                <a href="/home">Home</a>
+                <a href="/">Home</a>
               </NavLink>
               <NavLink>
                 <a href="/dashboard">Placements</a>
@@ -68,14 +68,14 @@ const App = () => {
                 <a href="/register">Register</a>
               </NavLink>
               <NavLink>
-                <a href="/">Login</a>
+                <a href="/login">Login</a>
               </NavLink>
             </NavLinks>
           </NavContainer>
         </Navbar>
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>

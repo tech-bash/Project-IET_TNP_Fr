@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 
 const RegistrationContainer = styled.div`
-  background-image: linear-gradient(to bottom right, #f06, #9f6);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -61,7 +60,7 @@ const Registration = () => {
     // Here, you would typically send the data to a server for registration
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/account/register/", {
+      const response = await fetch("https://placement-site.onrender.com/api/account/register/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

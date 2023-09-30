@@ -9,11 +9,18 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  margin: 0 auto;
 `;
 
 const FormLabel = styled.label`
   font-weight: bold;
+  font-size: 1.2rem;
 `;
 
 const FormInput = styled.input`
@@ -21,6 +28,7 @@ const FormInput = styled.input`
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  font-size: 1rem;
 `;
 
 const FormButton = styled.button`
@@ -30,6 +38,12 @@ const FormButton = styled.button`
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #0056b3;
+  }
 `;
 
 const CreateEntryForm = ({ closeModal }) => {
@@ -46,6 +60,7 @@ const CreateEntryForm = ({ closeModal }) => {
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     e.preventDefault();
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
@@ -71,10 +86,11 @@ const CreateEntryForm = ({ closeModal }) => {
       redirect: 'follow'
     };
     
-    fetch("http://127.0.0.1:8000/api/tnp/placement/create/", requestOptions)
+    fetch("https://placement-site.onrender.com/api/tnp/placement/create/", requestOptions)
       .then(response => response.text())
       .then(result => console.log(result))
       .catch(error => console.log('error', error));
+    
   };
 
   return (
@@ -90,7 +106,7 @@ const CreateEntryForm = ({ closeModal }) => {
           required
         />
 
-        <FormLabel htmlFor="rollNo">Roll No.:</FormLabel>
+        <FormLabel htmlFor="rollNo">College Roll No.:</FormLabel>
         <FormInput
           type="text"
           id="rollNo"
@@ -120,7 +136,7 @@ const CreateEntryForm = ({ closeModal }) => {
           required
         />
 
-        <FormButton onClick={handleSubmit}>Create</FormButton>
+        <FormButton type="submit">Create</FormButton>
       </Form>
     </FormContainer>
   );

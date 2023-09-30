@@ -70,20 +70,25 @@ const ModalHeader = styled.h2`
 
 const Dashboard = () => {
   const [placements, setPlacements] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false)
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
-    // Fetch student placement data from the API
-    fetch("http://127.0.0.1:8000/api/tnp/placement/list_all/", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      }
-    }) 
-      .then((response) => response.json())
-      .then((data) => setPlacements(data))
-      .catch((error) => console.error("Error fetching placements:", error));
-  }, []);
+    fetch("https://placement-site.onrender.com/api/tnp/placement/list_all/")
+      .then(res => res.json())
+      .then(
+        (result) => {
+          setIsLoaded(true);
+          setPlacements(result);
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          setIsLoaded(true);
+        }
+      )
+  }, [])
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -101,7 +106,7 @@ const Dashboard = () => {
         <TableHeader>
           <tr>
             <TableHeaderCell>Name</TableHeaderCell>
-            <TableHeaderCell>Roll No.</TableHeaderCell>
+            <TableHeaderCell>College Roll No.</TableHeaderCell>
             <TableHeaderCell>Company</TableHeaderCell>
             <TableHeaderCell>Package</TableHeaderCell>
           </tr>
@@ -109,10 +114,10 @@ const Dashboard = () => {
         <tbody>
           {placements.map((placement, index) => (
             <TableRow key={index}>
-              <TableCell>{placement.name}</TableCell>
-              <TableCell>{placement.rollNo}</TableCell>
-              <TableCell>{placement.company}</TableCell>
-              <TableCell>{placement.package}</TableCell>
+              <TableCell>{placement.user}</TableCell>
+              <TableCell>{placement.company_phone}</TableCell>
+              <TableCell>{placement.company_name}</TableCell>
+              <TableCell>{placement.company_salary}</TableCell>
             </TableRow>
           ))}
         </tbody>

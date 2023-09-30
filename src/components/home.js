@@ -1,29 +1,35 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const Navbar = styled.nav`
-  background-color: #007bff;
-  padding: 10px;
+const HomeContainer = styled.div`
+  background-image: url("https://lh3.googleusercontent.com/pw/ADCreHfgP61G6j8zHN7h-UxAMpgBG0biN1_bOmcQ4PaH9hnmfOGDR4eihINPfeeq2gxxSMFBKkBf8aD9-hHJ9fnkNRlku37Q4SAl_6l5Zy1rV3rwXqAB-tMUn6iuMcU2l4AOHwvyvZX-Ie1XNc11tW4vVqY4ig=w1164-h873-s-no?authuser=0");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
 `;
 
-const NavLink = styled(Link)`
-  color: #fff;
-  text-decoration: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  &:hover {
-    background-color: #0056b3;
-  }
+const Heading = styled.h1`
+  font-size: 3rem;
+  margin-bottom: 20px;
+`;
+
+const Subheading = styled.p`
+  font-size: 1.5rem;
+  margin-bottom: 40px;
 `;
 
 const Home = () => {
   return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
-    </div>
+    <HomeContainer>
+      <Heading>Welcome to IET</Heading>
+      <Subheading>Your Path to Excellence Begins Here</Subheading>
+    </HomeContainer>
   );
 };
 

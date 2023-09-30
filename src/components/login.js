@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const LoginPageContainer = styled.div`
-  background-image: linear-gradient(to bottom right, #f06, #9f6);
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -70,7 +69,7 @@ const Login = () => {
     event.preventDefault();
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/account/login/?", {
+      const response = await fetch("https://placement-site.onrender.com/api/account/login/?", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

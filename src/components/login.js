@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import PropTypes from 'prop-types';
 
 const LoginPageContainer = styled.div`
   min-height: 100vh;
@@ -50,7 +51,7 @@ const RegisterLink = styled(Link)`
   text-decoration: none;
 `;
 
-const Login = () => {
+const Login = ({setToken}) => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -76,6 +77,8 @@ const Login = () => {
         },
         body: JSON.stringify(formData),
       });
+      localStorage.setItem('token', response.token);
+      console.log(response);
 
       if (response.ok) {
         console.log("Login successful!");
@@ -114,4 +117,7 @@ const Login = () => {
   );
 };
 
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired
+}
 export default Login;

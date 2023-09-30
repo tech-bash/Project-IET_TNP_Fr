@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import styled from "styled-components";
 
@@ -50,7 +50,15 @@ const AppContainer = styled.div`
   font-family: Arial, sans-serif;
 `;
 
-const App = () => {
+function getToken(){
+  const tokenString = localStorage.getItem('token');
+  const userToken = JSON.parse(tokenString);
+  return userToken?.token
+}
+
+function App() {
+  const [token, setToken] = useState();
+
   return (
     <AppContainer>
       <Router>
@@ -75,7 +83,7 @@ const App = () => {
         </Navbar>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/login" element={<Login setToken={setToken} />} /> {" "}
           <Route path="/register" element={<Registration />} />
           <Route path="/dashboard" element={<Dashboard />} />
         </Routes>

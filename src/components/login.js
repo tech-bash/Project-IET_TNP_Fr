@@ -70,7 +70,7 @@ const Login = ({setToken}) => {
     event.preventDefault();
 
     try {
-      const response = await fetch("https://placement-site.onrender.com/api/account/login/?", {
+      const response = await fetch("https://placement-site.onrender.com/api/account/login/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

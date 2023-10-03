@@ -57,7 +57,6 @@ const Registration = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Registration data:", formData);
-    // Here, you would typically send the data to a server for registration
 
     try {
       const response = await fetch("https://placement-site.onrender.com/api/account/register/", {
@@ -82,7 +81,7 @@ const Registration = () => {
   return (
     <RegistrationContainer>
       <RegistrationForm onSubmit={handleSubmit}>
-        <h2>Registration</h2>
+        <h2>Sign up</h2>
         <InputField
           type="email"
           name="email"

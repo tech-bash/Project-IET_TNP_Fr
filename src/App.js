@@ -6,6 +6,7 @@ import Home from "./components/home";
 import Login from "./components/login";
 import Registration from "./components/registration";
 import Dashboard from "./components/dashboard";
+import ContactUs from "./components/contactUs";
 
 const Navbar = styled.nav`
   background-image: url("https://cdn-media-2.freecodecamp.org/w1280/5f9c9cfc740569d1a4ca3543.jpg");
@@ -73,10 +74,13 @@ function App() {
                 <a href="/dashboard">Placements</a>
               </NavLink>
               <NavLink>
-                <a href="/register">Register</a>
+              <a href="/contactUs">Contact</a>
               </NavLink>
               <NavLink>
-                <a href="/login">Login</a>
+                <a href="/register">Sign in</a>
+              </NavLink>
+              <NavLink>
+                <a href="/register">Sign up</a>
               </NavLink>
             </NavLinks>
           </NavContainer>
@@ -86,6 +90,7 @@ function App() {
           <Route path="/login" element={<Login setToken={setToken} />} /> {" "}
           <Route path="/register" element={<Registration />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/contactUs" element={<ContactUs />} />
         </Routes>
       </Router>
     </AppContainer>

@@ -77,7 +77,7 @@ function App() {
               <a href="/contactUs">Contact</a>
               </NavLink>
               <NavLink>
-                <a href="/register">Sign in</a>
+                <a href="/login">Sign in</a>
               </NavLink>
               <NavLink>
                 <a href="/register">Sign up</a>
